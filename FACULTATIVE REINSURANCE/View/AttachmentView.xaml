@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="FACULTATIVE_REINSURANCE.View.AttachmentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="{x:Type TextBox}" />
+        <Style BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}" />
+        <Style BasedOn="{StaticResource GridRowStyle}" TargetType="{x:Type RowDefinition}" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition Height="180" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0"  Grid.Column="0" Content="Email Id :"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Content="Attachment Files :"></Label>
+        <TextBox Name="txtEmail" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,0">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="LostFocus">
+                    <i:InvokeCommandAction  Command="{Binding LostFocusCommand}"
+                                            CommandParameter="{Binding ElementName=txtEmail,Path=Text}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <Button  Height="25" Width="60" Margin="5,0,0,0" Command="{Binding ButtonCommand}">
+                <Button.Content>
+                    <TextBlock VerticalAlignment="Center" Margin="0,3" Text="Browse" />
+                </Button.Content>
+            </Button>
+            <TextBlock Name="ErrorMessage" Width="Auto" Foreground="Red" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="5,0,0,0" Text="{Binding ErrorMessage}">
+                <!--<TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text}" Value="File Size is too Large.">
+                                <DataTrigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard BeginTime="00:00:00"
+                                        RepeatBehavior="Forever"
+                                        Storyboard.TargetName="ErrorMessage"
+                                        Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)">
+                                            <ColorAnimation  From="Black" To="Blue" Duration="0:0:1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </DataTrigger.EnterActions>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>-->
+            </TextBlock>
+        </StackPanel>
+
+        <Border Margin="5" Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="{StaticResource BorderBrushColur}" Visibility="Visible">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding AttactmentList}" Margin="5">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Border  Name="panelBorder">
+                                    <StackPanel Orientation="Horizontal" Name="stackAttachment">
+                                        <TextBlock Name="txtFilename" Text="{Binding FileName}" TextTrimming="CharacterEllipsis" Margin="3,0,0,0" Height="Auto" Width="Auto">
+                                        </TextBlock>
+                                        <TextBlock  Height="20" Width="Auto" Text="{Binding FileSize,StringFormat={}({0})}" Margin="3,0,2,0" />
+                                    </StackPanel>
+                                </Border>
+                                <TextBlock Text="x" Margin="3,0,0,2" FontWeight="Bold" FontSize="12" Name="txtClose">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.MouseLeftClickCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
+                                                      CommandParameter="{Binding ElementName=txtFilename,Path=Text}" />
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <Trigger SourceName="txtClose" Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="txtClose" Property="Foreground" Value="Red" />
+                                </Trigger>
+                                <Trigger SourceName="stackAttachment" Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="stackAttachment" Property="Background" Value="{StaticResource BorderBrushColur}" />
+                                    <Setter TargetName="txtFilename" Property="Foreground" Value="White" />
+                                    <!--<Setter TargetName="panelBorder" Property="BorderThickness" Value="1" />
+                                    <Setter TargetName="panelBorder" Property="BorderBrush" Value="{StaticResource BorderBrushColur}" />-->
+                                </Trigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <!--<ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>-->
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="15,0,0,0" VerticalAlignment="Center">
+            <CheckBox IsChecked="True" Content="Send the Information Through Email" />
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,20,0" HorizontalAlignment="Right">
+            <Button Height="25" Width="60">
+                <Button.Content>
+                    <TextBlock VerticalAlignment="Center" Margin="0,3" Text="Submit" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

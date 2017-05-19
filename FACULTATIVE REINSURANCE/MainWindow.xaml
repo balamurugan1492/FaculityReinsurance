@@ -1,0 +1,103 @@
+﻿<Window x:Class="FACULTATIVE_REINSURANCE.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:model="clr-namespace:FACULTATIVE_REINSURANCE.View_model"
+        xmlns:UserControl="clr-namespace:FACULTATIVE_REINSURANCE.View"
+        xmlns:converter="clr-namespace:FACULTATIVE_REINSURANCE.Converter"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="Faculative ReInsurance" Height="550" Width="800" Background="LightGray"
+        WindowStyle="None" WindowState="Normal" ResizeMode="NoResize" AllowsTransparency="True" Style="{StaticResource MainWindowStyle}">
+    <Window.DataContext>
+        <model:MainWindowViewModel />
+    </Window.DataContext>
+    <Window.Resources>
+        <converter:VisiblityConverter x:Key="visibleConverter" />
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel  Grid.Row="0" VerticalAlignment="Center" Background="{StaticResource BackgroundColour}" Margin="0,-10,0,0" MouseLeftButtonDown="DockPanel_MouseLeftButtonDown">
+            <Label Content="{Binding HeaderTitle}"  DockPanel.Dock="Left" FontWeight="Bold" FontSize="10" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal"  DockPanel.Dock="Right" HorizontalAlignment="Right"  Height="15" Background="Transparent">
+                <TextBlock Style="{StaticResource MinCloselStyle}">
+                <Image Source="/FACULTATIVE REINSURANCE;component/Images/minus.png" ToolTip="Minimize" MouseLeftButtonDown="MinLabel_MouseLeftButtonDown" Height="15" Width="15">
+                    <!--<Image.ToolTip>
+                            <Border BorderBrush="{StaticResource BorderBrushColur}" BorderThickness="2">
+                                <TextBlock Text="Minimize" Padding="2" Foreground="{StaticResource BorderBrushColur}"></TextBlock>
+                            </Border>
+                    </Image.ToolTip>-->
+                </Image>
+                </TextBlock>
+                <TextBlock Style="{StaticResource MinCloselStyle}">
+                <Image Source="/FACULTATIVE REINSURANCE;component/Images/close.png" MouseLeftButtonDown="CloseLabel_MouseLeftButtonDown" ToolTip="Close" Height="15" Width="15"></Image>
+                </TextBlock>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" Orientation="Vertical">
+            <TextBlock Text="{Binding MainTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Foreground" Value="{StaticResource ForeGroundColur}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="{StaticResource BackgroundColour}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <Separator VerticalAlignment="Bottom" Background="{StaticResource BackgroundColour}" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+            <RadioButton GroupName="selction" Background="{StaticResource BackgroundColour}" Foreground="{StaticResource ForeGroundColur}" IsChecked="{Binding CreateCheckBoxCheck}" Content="{Binding CreateInsurance}">
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding CreateIsCheckedCommand}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RadioButton>
+            <RadioButton GroupName="selction" Background="{StaticResource BackgroundColour}" Foreground="{StaticResource ForeGroundColur}" Margin="5,0,0,0" Content="{Binding ViewInsurance}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Checked">
+                        <i:InvokeCommandAction Command="{Binding ViewIsCheckedCommand}"></i:InvokeCommandAction>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </RadioButton>
+        </StackPanel>
+        <Grid Grid.Row="3">
+            <TabControl Visibility="{Binding TabItemVisiblity,Converter={StaticResource visibleConverter}}" TabStripPlacement="Left" BorderBrush="{StaticResource BorderBrushColur}" Background="#E9E8E6" BorderThickness="2" Margin="5,5,5,5">
+                <TabItem Style="{StaticResource TabItemStyle}" Header="{Binding TabItem1Title}" Background="LightGray">
+                    <TabItem.Content>
+                        <UserControl:GeneralInformation />
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Style="{StaticResource TabItemStyle}" Header="{Binding TabItem2Title}">
+                    <TabItem.Content>
+                        <UserControl:CoverageView />
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Style="{StaticResource TabItemStyle}" Header="{Binding TabItem3Title}">
+                    <TabItem.Content>
+                        <UserControl:ExtensionsView />
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Style="{StaticResource TabItemStyle}" Header="{Binding TabItem4Title}">
+                    <TabItem.Content>
+                        <UserControl:PolicyControlView />
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Style="{StaticResource TabItemStyle}" Header="{Binding TabItem5Title}">
+                    <TabItem.Content>
+                        <UserControl:AttachmentView />
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+            <UserControl:DataGridView Visibility="{Binding DataGridViewVisbility,Converter={StaticResource visibleConverter}}" />
+        </Grid>
+    </Grid>
+</Window>

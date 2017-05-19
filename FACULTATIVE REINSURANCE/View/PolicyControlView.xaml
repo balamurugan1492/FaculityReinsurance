@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="FACULTATIVE_REINSURANCE.View.PolicyControlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             >
+        <UserControl.Resources>
+        <Style TargetType="{x:Type RowDefinition}" x:Key="rowStyle">
+            <Setter Property="Height" Value="35"/>
+        </Style>
+            <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="{x:Type TextBox}" />
+            <Style BasedOn="{StaticResource LabelStyle}" TargetType="{x:Type Label}" />
+            <!--<Style BasedOn="{StaticResource GridRowStyle}" TargetType="{x:Type RowDefinition}"/>-->
+            <Style BasedOn="{StaticResource DatePickerStyle}" TargetType="{x:Type DatePicker}"/>
+        </UserControl.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Style="{StaticResource rowStyle}" />
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            <RowDefinition Style="{StaticResource rowStyle}"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="{Binding GeneralHeader}" FontSize="18" FontWeight="ExtraBold" />
+            </StackPanel>
+            <Label Grid.Row="1"  Grid.Column="0" Content="Special Condition :"></Label>
+            <Label Grid.Row="2" Grid.Column="0" Content="Claim Experience :"></Label>
+            <Label Grid.Row="3" Grid.Column="0" Content="Original Gross :"></Label>
+            <Label Grid.Row="4" Grid.Column="0" Content="Our Support :"></Label>
+            <Label Grid.Row="5" Grid.Column="0" Content="Faculity support Required :"></Label>
+            <Label Grid.Row="6" Grid.Column="0" Content="RI Commision :"></Label>
+            <Label Grid.Row="7" Grid.Column="0" Content="Validity Of Support :"></Label>
+            <Label Grid.Row="8" Grid.Column="0" Content="Choice of Law/Jurisdicition :"></Label>
+            <Label Grid.Row="9" Grid.Column="0" Content="General Exclusion :"></Label>
+            <Label Grid.Row="10" Grid.Column="0" Content="Additional Subjectivity/Waranites :"></Label>
+            <TextBox Grid.Row="1" Grid.Column="1" ></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="3" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="4" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="5" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="6" Grid.Column="1"></TextBox>
+        <DatePicker Grid.Row="7" Grid.Column="1" ></DatePicker>
+        <TextBox Grid.Row="8" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="9" Grid.Column="1"></TextBox>
+        <TextBox Grid.Row="10" Grid.Column="1"></TextBox>
+    </Grid>
+</UserControl>

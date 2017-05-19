@@ -1,0 +1,137 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ForeGroundColur" Color="White" />
+    <SolidColorBrush x:Key="BorderBackgroundColour" Color="#3E454F" />
+    <SolidColorBrush x:Key="BorderBrushColur" Color="#73D5A2" />
+    <SolidColorBrush x:Key="BackgroundColour" Color="#73D5A2" />
+    <Style  TargetType="{x:Type Window}" x:Key="MainWindowStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderThickness="2" BorderBrush="{StaticResource BorderBrushColur}" Background="{StaticResource BorderBackgroundColour}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="MinCloselStyle">
+        <Setter Property="Background" Value="{StaticResource BackgroundColour}" />
+        <Setter Property="Foreground" Value="{StaticResource ForeGroundColur}" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource BackgroundColour}" />
+                <Setter Property="Background" Value="{StaticResource ForeGroundColur}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type Label}" x:Key="CloseLabelStyle">
+        <Setter Property="Background" Value="{StaticResource BackgroundColour}" />
+        <Setter Property="Foreground" Value="{StaticResource ForeGroundColur}" />
+        <Setter Property="Width" Value="18" />
+        <!--<Setter Property="Height" Value="25" />-->
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource BackgroundColour}" />
+                <Setter Property="Background" Value="{StaticResource ForeGroundColur}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type TextBlock}" x:Key="TabItemHeaderStyle">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+    </Style>
+    <Style TargetType="{x:Type Label}" x:Key="LabelStyle">
+        <Setter Property="VerticalAlignment"  Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2,0,0,0" />
+    </Style>
+    <Style TargetType="{x:Type DatePicker}" x:Key="DatePickerStyle">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="{x:Type ComboBox}" x:Key="ComboBoxStyle">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    <Style TargetType="{x:Type RowDefinition}" x:Key="GridRowStyle">
+        <Setter Property="Height" Value="50"></Setter>
+    </Style>
+    <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border Name="Border" Background="White" BorderBrush="{StaticResource BorderBrushColur}">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,2" Height="50">
+                            <ContentPresenter.Content>
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock  Text="{TemplateBinding Header}" Style="{StaticResource TabItemHeaderStyle}" Name="txtBlock" />
+                                </StackPanel>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" SourceName="Border" />
+                                <Condition Property="IsSelected" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundColour}" />
+                            <Setter TargetName="txtBlock" Property="Foreground" Value="White" />
+                        </MultiTrigger>
+                        <Trigger Property="IsMouseOver" Value="True" SourceName="Border">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundColour}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundColour}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type GroupBox}" x:Key="GroupBoxStyle">
+        <Setter Property="BorderBrush" Value="{StaticResource BackgroundColour}" />
+    </Style>
+    <Style TargetType="{x:Type Label}" x:Key="LabeHeaderStyle">
+        <Setter Property="Foreground" Value="{StaticResource BackgroundColour}" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style TargetType="{x:Type ToolTip}">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolTip}">
+                    <StackPanel Margin="7,1">
+                        <Border Background="{StaticResource ForeGroundColur}" BorderThickness="1" BorderBrush="{StaticResource BorderBrushColur}" CornerRadius="1">
+                            <ContentPresenter Margin="2,0,2,0"  HorizontalAlignment="Center" VerticalAlignment="Top" />
+                        </Border>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Name="btnBorder" Background="{StaticResource BorderBrushColur}" BorderThickness="2" BorderBrush="{StaticResource BorderBrushColur}" CornerRadius="2">
+                        <ContentPresenter Margin="2,0,2,0"  HorizontalAlignment="Center" VerticalAlignment="Top" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="btnBorder" Property="Background" Value="{StaticResource ForeGroundColur}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
